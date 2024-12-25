@@ -1,0 +1,2 @@
+- Not applicable for any new users to join and sign up from the internet
+- Security breach since all sign in credentials are stored on the web file

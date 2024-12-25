@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> The Results Portal </title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <div class="container">
+        <h2> Student Login </h2>
+        <form id="loginForm">
+            <input type="text" id="studentId" placeholder="Enter Student ID" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="results" class="results" style="display: none;">
+            <h3>Examination Results</h3>
+            <ul id="resultsList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const mockDatabase = {
+            "student123": {
+                password: "password123",
+                results: ["Math: A", "Science: B+", "History: A-"]
+            },
+            "student456": {
+                password: "mypassword",
+                results: ["Math: C", "Science: B", "History: B+"]
+            },
+            "student001": {
+                password: "password256",
+                results: ["Math : C", "Science: A+", "History: B"]
+            }
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('password').value;
+
+            if (mockDatabase[studentId] && mockDatabase[studentId].password === password) {
+                const results = mockDatabase[studentId].results;
+                const resultsList = document.getElementById('resultsList');
+
+                resultsList.innerHTML = '';
+                results.forEach(result => {
+                    const li = document.createElement('li');
+                    li.textContent = result;
+                    resultsList.appendChild(li);
+                });
+
+                document.getElementById('results').style.display = 'block';
+            } else {
+                alert('Invalid Student ID or Password');
+            }
+        });
+    </script>
+    
+</body>
+</html>
